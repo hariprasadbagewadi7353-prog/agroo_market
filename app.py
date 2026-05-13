@@ -62,7 +62,6 @@ class Product(db.Model):
     farmer_id = db.Column(db.Integer)
 
 
-    
 class Scheme(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
@@ -72,10 +71,6 @@ class Scheme(db.Model):
 
     image = db.Column(db.String(200))
     video = db.Column(db.String(200))
-
-
-
-
 
 
 class Order(db.Model):
@@ -92,7 +87,7 @@ class Order(db.Model):
         db.String(50),
         default="Order Placed"
     )
-     
+
 # ------------------------
 # HOME
 # ------------------------
@@ -101,81 +96,6 @@ class Order(db.Model):
 def home():
 
     return render_template("index.html")
-
-
-
-
-
-
-
-# ------------------------
-# ADD SCHEME
-# ------------------------
-
-@app.route('/add_scheme', methods=['GET', 'POST'])
-def add_scheme():
-
-    # admin only
-    if 'admin' not in session:
-        return redirect('/login_admin')
-
-    if request.method == 'POST':
-
-        title = request.form.get('title')
-        description = request.form.get('description')
-
-        # IMAGE
-        image_file = request.files.get('image')
-        image_name = ""
-
-        if image_file and image_file.filename != "":
-
-            image_name = secure_filename(image_file.filename)
-
-            image_path = os.path.join(
-                app.config['UPLOAD_FOLDER'],
-                image_name
-            )
-
-            image_file.save(image_path)
-
-        # VIDEO
-        video_file = request.files.get('video')
-        video_name = ""
-
-        if video_file and video_file.filename != "":
-
-            video_name = secure_filename(video_file.filename)
-
-            video_path = os.path.join(
-                app.config['UPLOAD_FOLDER'],
-                video_name
-            )
-
-            video_file.save(video_path)
-
-        # SAVE SCHEME
-        new_scheme = Scheme(
-            title=title,
-            description=description,
-            image=image_name,
-            video=video_name
-        )
-
-        db.session.add(new_scheme)
-        db.session.commit()
-
-        flash("Scheme Added Successfully ✅")
-
-        return redirect('/show_schemes')
-
-    return render_template("add_scheme.html")
-
-
-
-
-
-
 
 
 # ------------------------
@@ -468,7 +388,9 @@ def delete_product(id):
 
 # ------------------------
 # ADD SCHEME
-# -----------@app.route('/add_scheme', methods=['GET', 'POST'])
+# ------------------------
+
+@app.route('/add_scheme', methods=['GET', 'POST'])
 def add_scheme():
 
     if 'admin' not in session:
@@ -484,6 +406,7 @@ def add_scheme():
         image_name = ""
 
         if image_file and image_file.filename != "":
+
             image_name = secure_filename(image_file.filename)
 
             image_path = os.path.join(
@@ -498,6 +421,7 @@ def add_scheme():
         video_name = ""
 
         if video_file and video_file.filename != "":
+
             video_name = secure_filename(video_file.filename)
 
             video_path = os.path.join(
@@ -522,6 +446,8 @@ def add_scheme():
         return redirect('/show_schemes')
 
     return render_template("add_scheme.html")
+
+
 # ------------------------
 # SHOW SCHEMES
 # ------------------------
@@ -639,6 +565,7 @@ def checkout():
 # ------------------------
 # PLACE ORDER
 # ------------------------
+
 @app.route('/place_order', methods=['POST'])
 def place_order():
 
@@ -672,6 +599,10 @@ def place_order():
     return redirect('/my_orders')
 
 
+# ------------------------
+# MY ORDERS
+# ------------------------
+
 @app.route('/my_orders')
 def my_orders():
 
@@ -688,6 +619,9 @@ def my_orders():
     )
 
 
+# ------------------------
+# UPDATE STATUS
+# ------------------------
 
 @app.route('/update_status/<int:id>/<status>')
 def update_status(id, status):
@@ -704,8 +638,9 @@ def update_status(id, status):
     return redirect('/manage_orders')
 
 
-
-
+# ------------------------
+# MANAGE ORDERS
+# ------------------------
 
 @app.route('/manage_orders')
 def manage_orders():
@@ -719,6 +654,8 @@ def manage_orders():
         "manage_orders.html",
         orders=orders
     )
+
+
 # ------------------------
 # LOGOUT
 # ------------------------
@@ -756,4 +693,10 @@ if __name__ == "__main__":
 
             print("Default Admin Created")
 
-    app.run(debug=True)
+    # Render deployment support
+    port = int(os.environ.get("PORT", 5000))
+
+    app.run(
+        host="0.0.0.0",
+        port=port
+    )
