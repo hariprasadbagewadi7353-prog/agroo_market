@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Agro Marketplace</title>
+
+<style>
+
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#fdf4ea;
+    overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+.navbar{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:rgba(46,125,50,0.95);
+    backdrop-filter:blur(10px);
+    padding:18px 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:1000;
+    box-shadow:0 4px 15px rgba(0,0,0,0.15);
+}
+
+.logo{
+    color:white;
+    font-size:32px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.menu a{
+    color:white;
+    text-decoration:none;
+    margin-left:28px;
+    font-size:17px;
+    position:relative;
+    transition:0.3s;
+}
+
+.menu a::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0%;
+    height:2px;
+    background:white;
+    transition:0.3s;
+}
+
+.menu a:hover::after{
+    width:100%;
+}
+
+.menu a:hover{
+    color:#dcedc8;
+}
+
+/* HERO SECTION */
+
+.hero{
+
+    height:100vh;
+
+    background:
+    linear-gradient(
+    rgba(255,255,255,0.15),
+    rgba(255,255,255,0.15)
+    ),
+
+    url("{{ url_for('static', filename='images/farm_bg.png') }}");
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:120px 80px 40px;
+}
+
+/* LEFT */
+
+.left{
+    width:48%;
+    animation:slideLeft 1s ease;
+}
+
+.left h1{
+    font-size:72px;
+    line-height:90px;
+    color:#4caf50;
+    margin-bottom:20px;
+    font-weight:bold;
+}
+
+.left h2{
+    font-size:52px;
+    letter-spacing:10px;
+    color:#1b1b1b;
+    margin-bottom:20px;
+}
+
+.left p{
+    font-size:18px;
+    color:#666;
+    line-height:32px;
+    margin-bottom:30px;
+    width:80%;
+}
+
+.info{
+    font-size:28px;
+    color:#8d4f37;
+    margin-bottom:30px;
+    font-weight:bold;
+}
+
+.btn{
+    padding:14px 34px;
+    background:#5c940d;
+    color:white;
+    border:none;
+    border-radius:35px;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.3s;
+    text-decoration:none;
+    display:inline-block;
+}
+
+.btn:hover{
+    background:#2e7d32;
+    transform:scale(1.05);
+}
+
+/* RIGHT */
+
+.right{
+    width:48%;
+    text-align:center;
+    animation:slideRight 1s ease;
+}
+
+.right img{
+    width:100%;
+    max-width:650px;
+    animation:float 4s ease-in-out infinite;
+}
+
+/* FEATURES */
+
+.features{
+    width:90%;
+    margin:60px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 5px 18px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card h3{
+    color:#2e7d32;
+    margin:15px 0;
+    font-size:26px;
+}
+
+.card p{
+    color:#666;
+    line-height:28px;
+}
+
+/* ANIMATIONS */
+
+@keyframes slideLeft{
+    from{
+        opacity:0;
+        transform:translateX(-60px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+@keyframes slideRight{
+    from{
+        opacity:0;
+        transform:translateX(60px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-15px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+        height:auto;
+        padding-top:140px;
+    }
+
+    .left,
+    .right{
+        width:100%;
+    }
+
+    .left p{
+        width:100%;
+    }
+
+    .left h1{
+        font-size:48px;
+        line-height:60px;
+    }
+
+    .left h2{
+        font-size:34px;
+        letter-spacing:4px;
+    }
+
+    .menu{
+        display:none;
+    }
+
+    .right img{
+        margin-top:30px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+        🌾 Agro Marketplace
+    </div>
+
+    <div class="menu">
+
+        <a href="/">Home</a>
+        <a href="/login_farmer">Farmer</a>
+        <a href="/login_customer">Customer</a>
+        <a href="/register_farmer">Farmer Register</a>
+        <a href="/register_customer">Customer Register</a>
+        <a href="/show_products">Products</a>
+        <a href="/show_schemes">Schemes</a>
+        <a href="/login_admin">Admin</a>
+
+    </div>
+
+</div>
+
+<!-- HERO SECTION -->
+
+<div class="hero">
+
+    <!-- LEFT -->
+
+    <div class="left">
+
+        <h1>Farmer's</h1>
+
+        <h2>MARKET</h2>
+
+        <p>
+            Buy fresh vegetables and organic products directly from farmers.
+            Support local agriculture and enjoy healthy food without middlemen.
+        </p>
+
+        <div class="info">
+            Fresh Products • Direct Farmers
+        </div>
+
+        <a href="/show_products" class="btn">
+            SEE MORE
+        </a>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="right">
+
+        <img src="{{ url_for('static', filename='image/farmer_market.png') }}">
+
+    </div>
+
+</div>
+
+<!-- FEATURES -->
+
+<div class="features">
+
+    <div class="card">
+
+        <h3>🌱 Fresh Products</h3>
+
+        <p>
+            Organic vegetables and fruits directly from farms.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>👨‍🌾 Farmers</h3>
+
+        <p>
+            Farmers can sell products without middlemen.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>🚚 Fast Delivery</h3>
+
+        <p>
+            Easy and quick access to healthy farm products.
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

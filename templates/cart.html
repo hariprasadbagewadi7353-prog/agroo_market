@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Your Cart</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#eef2ea;
+        }
+
+        /* NAVBAR */
+
+        .navbar{
+            background:#2e7d32;
+            padding:18px 60px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .logo{
+            color:white;
+            font-size:30px;
+            font-weight:bold;
+        }
+
+        .menu a{
+            color:white;
+            text-decoration:none;
+            margin-left:30px;
+            font-size:18px;
+        }
+
+        /* TITLE */
+
+        .title{
+            text-align:center;
+            margin:40px 0;
+        }
+
+        .title h1{
+            color:#2e7d32;
+            font-size:55px;
+        }
+
+        /* CONTAINER */
+
+        .container{
+            width:92%;
+            margin:auto;
+            padding-bottom:50px;
+        }
+
+        /* CARD */
+
+        .card{
+            background:white;
+            border-radius:20px;
+            overflow:hidden;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom:35px;
+        }
+
+        /* IMAGE */
+
+        .card img{
+            width:100%;
+            height:300px;
+            object-fit:contain;
+            background:#f8f8f8;
+            padding:15px;
+            display:block;
+        }
+
+        /* CONTENT */
+
+        .content{
+            padding:25px;
+            text-align:center;
+        }
+
+        .content h2{
+            font-size:38px;
+            color:#222;
+            margin-bottom:12px;
+        }
+
+        .price{
+            color:#2e7d32;
+            font-size:34px;
+            font-weight:bold;
+            margin-bottom:15px;
+        }
+
+        .info{
+            color:#555;
+            font-size:18px;
+            margin-bottom:8px;
+        }
+
+        /* BUTTON */
+
+        .remove-btn{
+            margin-top:20px;
+            padding:14px 35px;
+            border:none;
+            border-radius:12px;
+            background:red;
+            color:white;
+            font-size:18px;
+            cursor:pointer;
+        }
+
+        .remove-btn:hover{
+            background:darkred;
+        }
+
+        /* CHECKOUT */
+
+        .checkout-box{
+            text-align:center;
+            margin-top:40px;
+        }
+
+        .checkout-btn{
+            padding:18px 50px;
+            background:#2e7d32;
+            color:white;
+            text-decoration:none;
+            font-size:24px;
+            border-radius:15px;
+            display:inline-block;
+        }
+
+        .checkout-btn:hover{
+            background:#1b5e20;
+        }
+
+        /* EMPTY */
+
+        .empty{
+            text-align:center;
+            margin-top:80px;
+            font-size:32px;
+            color:#666;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+        🌾 Agro Marketplace
+    </div>
+
+    <div class="menu">
+
+        <a href="/">Home</a>
+        <a href="/show_products">Products</a>
+        <a href="/show_schemes">Schemes</a>
+        <a href="/logout">Logout</a>
+
+    </div>
+
+</div>
+
+<!-- TITLE -->
+
+<div class="title">
+
+    <h1>🛒 Your Cart</h1>
+
+</div>
+
+<!-- CART ITEMS -->
+
+<div class="container">
+
+    {% if products %}
+
+        {% for p in products %}
+
+        <div class="card">
+
+            <!-- IMAGE -->
+
+            {% if p.image %}
+
+            <img src="{{ url_for('static', filename='uploads/' + p.image) }}">
+
+            {% else %}
+
+            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1200&auto=format&fit=crop">
+
+            {% endif %}
+
+            <!-- CONTENT -->
+
+            <div class="content">
+
+                <h2>{{ p.name }}</h2>
+
+                <div class="price">
+                    ₹ {{ p.price }}
+                </div>
+
+                <div class="info">
+                    📍 {{ p.location }}
+                </div>
+
+                <div class="info">
+                    📦 {{ p.quantity }}
+                </div>
+
+                <!-- REMOVE -->
+
+                <a href="/remove/{{ p.id }}">
+
+                    <button class="remove-btn">
+                        ❌ Remove
+                    </button>
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+        <!-- CHECKOUT -->
+
+        <div class="checkout-box">
+
+            <a href="/checkout" class="checkout-btn">
+
+                💳 Proceed To Checkout
+
+            </a>
+
+        </div>
+
+    {% else %}
+
+        <div class="empty">
+
+            Cart is Empty 🛒
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+<!-- FLASH MESSAGE -->
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{ messages[0] }}");
+        </script>
+    {% endif %}
+{% endwith %}
+
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Checkout</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#eef2ea;
+        }
+
+        /* NAVBAR */
+
+        .navbar{
+            background:#2e7d32;
+            padding:18px 60px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .logo{
+            color:white;
+            font-size:30px;
+            font-weight:bold;
+        }
+
+        .menu a{
+            color:white;
+            text-decoration:none;
+            margin-left:30px;
+            font-size:18px;
+        }
+
+        /* TITLE */
+
+        .title{
+            text-align:center;
+            margin:40px 0;
+        }
+
+        .title h1{
+            color:#2e7d32;
+            font-size:55px;
+        }
+
+        /* MAIN */
+
+        .main-container{
+            width:92%;
+            margin:auto;
+            display:grid;
+            grid-template-columns:1fr 420px;
+            gap:30px;
+            padding-bottom:60px;
+        }
+
+        /* PRODUCT SECTION */
+
+        .products-box{
+            display:flex;
+            flex-direction:column;
+            gap:25px;
+        }
+
+        .card{
+            background:white;
+            border-radius:20px;
+            overflow:hidden;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card img{
+            width:100%;
+            height:260px;
+            object-fit:contain;
+            background:#f8f8f8;
+            padding:15px;
+        }
+
+        .content{
+            padding:22px;
+        }
+
+        .content h2{
+            font-size:34px;
+            color:#222;
+            margin-bottom:12px;
+        }
+
+        .price{
+            color:#2e7d32;
+            font-size:30px;
+            font-weight:bold;
+            margin-bottom:10px;
+        }
+
+        .info{
+            color:#555;
+            font-size:18px;
+            margin-bottom:8px;
+        }
+
+        /* FORM */
+
+        .checkout-box{
+            background:white;
+            padding:30px;
+            border-radius:20px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+            height:fit-content;
+            position:sticky;
+            top:20px;
+        }
+
+        .checkout-box h2{
+            color:#2e7d32;
+            margin-bottom:25px;
+            text-align:center;
+        }
+
+        .input-box{
+            margin-bottom:18px;
+        }
+
+        .input-box input,
+        .input-box textarea{
+            width:100%;
+            padding:14px;
+            border:1px solid #ccc;
+            border-radius:10px;
+            font-size:16px;
+            outline:none;
+        }
+
+        textarea{
+            resize:none;
+            height:120px;
+        }
+
+        .place-btn{
+            width:100%;
+            padding:16px;
+            border:none;
+            border-radius:12px;
+            background:#2e7d32;
+            color:white;
+            font-size:20px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .place-btn:hover{
+            background:#1b5e20;
+        }
+
+        /* EMPTY */
+
+        .empty{
+            text-align:center;
+            font-size:30px;
+            color:#666;
+            margin-top:80px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width:900px){
+
+            .main-container{
+                grid-template-columns:1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+        🌾 Agro Marketplace
+    </div>
+
+    <div class="menu">
+
+        <a href="/">Home</a>
+        <a href="/show_products">Products</a>
+        <a href="/cart">Cart</a>
+        <a href="/logout">Logout</a>
+
+    </div>
+
+</div>
+
+<!-- TITLE -->
+
+<div class="title">
+
+    <h1>💳 Checkout</h1>
+
+</div>
+
+<!-- MAIN -->
+
+{% if products %}
+
+<div class="main-container">
+
+    <!-- PRODUCTS -->
+
+    <div class="products-box">
+
+        {% for p in products %}
+
+        <div class="card">
+
+            {% if p.image %}
+
+            <img src="{{ url_for('static', filename='uploads/' + p.image) }}">
+
+            {% else %}
+
+            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1200&auto=format&fit=crop">
+
+            {% endif %}
+
+            <div class="content">
+
+                <h2>{{ p.name }}</h2>
+
+                <div class="price">
+                    ₹ {{ p.price }}
+                </div>
+
+                <div class="info">
+                    📍 {{ p.location }}
+                </div>
+
+                <div class="info">
+                    📦 {{ p.quantity }}
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <!-- CHECKOUT FORM -->
+
+    <div class="checkout-box">
+
+        <h2>Customer Details</h2>
+
+        <form method="POST" action="/place_order">
+
+            {% for p in products %}
+                <input type="hidden"
+                       name="product_ids"
+                       value="{{ p.id }}">
+            {% endfor %}
+
+            <div class="input-box">
+
+                <input type="text"
+                       name="name"
+                       placeholder="Enter Full Name"
+                       required>
+
+            </div>
+
+            <div class="input-box">
+
+                <textarea name="address"
+                          placeholder="Enter Delivery Address"
+                          required></textarea>
+
+            </div>
+
+            <div class="input-box">
+
+                <input type="text"
+                       name="phone"
+                       placeholder="Enter Phone Number"
+                       required>
+
+            </div>
+
+            <button type="submit" class="place-btn">
+
+                ✅ Place Order
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% else %}
+
+<div class="empty">
+
+    No Products In Checkout
+
+</div>
+
+{% endif %}
+
+<!-- FLASH MESSAGE -->
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{ messages[0] }}");
+        </script>
+    {% endif %}
+{% endwith %}
+
+</body>
+</html>

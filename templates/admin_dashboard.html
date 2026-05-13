@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Admin Dashboard</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f4f4f4;
+        }
+
+        /* Navbar */
+        .navbar{
+            background:linear-gradient(90deg,#1b5e20,#43a047);
+            color:white;
+            padding:20px;
+            text-align:center;
+            font-size:32px;
+            font-weight:bold;
+            box-shadow:0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Container */
+        .container{
+            width:90%;
+            margin:50px auto;
+            text-align:center;
+        }
+
+        h2{
+            margin-bottom:40px;
+            color:#2e7d32;
+            font-size:35px;
+        }
+
+        /* Cards */
+        .grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:30px;
+        }
+
+        .card{
+            background:white;
+            padding:35px 20px;
+            border-radius:18px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.1);
+            transition:0.3s;
+        }
+
+        .card:hover{
+            transform:translateY(-8px);
+            box-shadow:0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .icon{
+            font-size:55px;
+            margin-bottom:15px;
+        }
+
+        .title{
+            font-size:22px;
+            margin-bottom:20px;
+            color:#333;
+            font-weight:bold;
+        }
+
+        .btn{
+            display:inline-block;
+            padding:12px 20px;
+            background:#2e7d32;
+            color:white;
+            text-decoration:none;
+            border-radius:8px;
+            transition:0.3s;
+            font-size:16px;
+        }
+
+        .btn:hover{
+            background:#1b5e20;
+        }
+
+        /* Logout Button */
+        .logout{
+            background:red;
+        }
+
+        .logout:hover{
+            background:darkred;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+    🌾 Agro Marketplace Admin Dashboard
+</div>
+
+<div class="container">
+
+    <h2>Welcome Admin 👨‍💼</h2>
+
+    <div class="grid">
+
+        <!-- Add Product -->
+        <div class="card">
+
+            <div class="icon">➕</div>
+
+            <div class="title">
+                Add Product
+            </div>
+
+            <a href="/add_product" class="btn">
+                Open
+            </a>
+            <div>
+            <a href="/manage_orders"  class="btn">
+    Manage Orders
+</a>
+</div>
+
+        </div>
+
+        <!-- View Products -->
+        <div class="card">
+
+            <div class="icon">🛒</div>
+
+            <div class="title">
+                View Products
+            </div>
+
+            <a href="/show_products" class="btn">
+                Open
+            </a>
+
+        </div>
+
+        <!-- Register Farmer -->
+        <div class="card">
+
+            <div class="icon">👨‍🌾</div>
+
+            <div class="title">
+                Register Farmer
+            </div>
+
+            <a href="/register_farmer" class="btn">
+                Open
+            </a>
+
+        </div>
+
+        <!-- Register Customer -->
+        <div class="card">
+
+            <div class="icon">🧑‍💼</div>
+
+            <div class="title">
+                Register Customer
+            </div>
+
+            <a href="/register_customer" class="btn">
+                Open
+            </a>
+
+        </div>
+
+        <!-- Add Scheme -->
+        <div class="card">
+
+            <div class="icon">📢</div>
+
+            <div class="title">
+                Add Scheme
+            </div>
+
+            <a href="/add_scheme" class="btn">
+                Add Scheme
+            </a>
+
+        </div>
+
+        <!-- Logout -->
+        <div class="card">
+
+            <div class="icon">🚪</div>
+
+            <div class="title">
+                Logout
+            </div>
+
+            <a href="/logout" class="btn logout">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

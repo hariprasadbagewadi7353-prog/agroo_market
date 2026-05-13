@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>My Orders</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#eef2ea;
+}
+
+/* NAVBAR */
+
+.navbar{
+    background:#2e7d32;
+    padding:18px 60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo{
+    color:white;
+    font-size:30px;
+    font-weight:bold;
+}
+
+.menu a{
+    color:white;
+    text-decoration:none;
+    margin-left:28px;
+    font-size:18px;
+    transition:0.3s;
+}
+
+.menu a:hover{
+    color:#dcedc8;
+}
+
+/* HERO */
+
+.hero{
+    height:280px;
+
+    background:
+    linear-gradient(
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.55)
+    ),
+
+    url("https://images.unsplash.com/photo-1506617420156-8e4536971650?q=80&w=1400&auto=format&fit=crop");
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+
+    color:white;
+}
+
+.hero h1{
+    font-size:70px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:25px;
+}
+
+/* CONTAINER */
+
+.container{
+    width:90%;
+    margin:50px auto;
+}
+
+/* ORDER CARD */
+
+.card{
+    background:white;
+    padding:25px;
+    margin-bottom:30px;
+    border-radius:20px;
+    box-shadow:0 5px 18px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.top h2{
+    color:#2e7d32;
+    font-size:32px;
+}
+
+.badge{
+    background:#2e7d32;
+    color:white;
+    padding:8px 18px;
+    border-radius:30px;
+    font-size:15px;
+}
+
+/* DETAILS */
+
+.details{
+    margin-top:10px;
+}
+
+.details p{
+    color:#555;
+    font-size:18px;
+    margin-bottom:10px;
+    line-height:28px;
+}
+
+/* STATUS */
+
+.status{
+    margin-top:20px;
+    font-size:20px;
+    font-weight:bold;
+    color:#222;
+}
+
+/* BAR */
+
+.bar{
+    width:100%;
+    height:18px;
+    background:#ddd;
+    border-radius:30px;
+    overflow:hidden;
+    margin-top:15px;
+}
+
+.fill{
+    height:100%;
+    background:#2e7d32;
+    border-radius:30px;
+}
+
+/* STATUS COLORS */
+
+.order{
+    width:25%;
+}
+
+.packed{
+    width:50%;
+}
+
+.delivery{
+    width:75%;
+}
+
+.delivered{
+    width:100%;
+}
+
+/* BUTTONS */
+
+.btn-box{
+    margin-top:25px;
+    display:flex;
+    gap:15px;
+}
+
+.btn{
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    color:white;
+    text-decoration:none;
+}
+
+.track-btn{
+    background:#2e7d32;
+}
+
+.support-btn{
+    background:#ff9800;
+}
+
+.btn:hover{
+    opacity:0.9;
+}
+
+/* EMPTY */
+
+.empty{
+    text-align:center;
+    font-size:35px;
+    color:#666;
+    margin-top:80px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+        🌾 Agro Marketplace
+    </div>
+
+    <div class="menu">
+
+        <a href="/">Home</a>
+        <a href="/show_products">Products</a>
+        <a href="/show_schemes">Schemes</a>
+        <a href="/cart">Cart</a>
+        <a href="/checkout">Checkout</a>
+        <a href="/logout">Logout</a>
+
+    </div>
+
+</div>
+
+<!-- HERO -->
+
+<div class="hero">
+
+    <div>
+
+        <h1>🚚 My Orders</h1>
+
+        <p>
+            Track your fresh farm product deliveries
+        </p>
+
+    </div>
+
+</div>
+
+<!-- ORDERS -->
+
+<div class="container">
+
+{% if orders %}
+
+    {% for o in orders %}
+
+    <div class="card">
+
+        <div class="top">
+
+            <h2>{{ o.product_name }}</h2>
+
+            <div class="badge">
+                Active Order
+            </div>
+
+        </div>
+
+        <div class="details">
+
+            <p>
+                📍 <strong>Delivery Address:</strong>
+                {{ o.address }}
+            </p>
+
+            <p>
+                📞 <strong>Contact:</strong>
+                {{ o.phone }}
+            </p>
+
+        </div>
+
+        <!-- STATUS -->
+
+        <div class="status">
+
+            Status:
+            {{ o.status }}
+
+        </div>
+
+        <!-- PROGRESS BAR -->
+
+        <div class="bar">
+
+            {% if o.status == 'Order Placed' %}
+
+            <div class="fill order"></div>
+
+            {% elif o.status == 'Packed' %}
+
+            <div class="fill packed"></div>
+
+            {% elif o.status == 'Out For Delivery' %}
+
+            <div class="fill delivery"></div>
+
+            {% elif o.status == 'Delivered' %}
+
+            <div class="fill delivered"></div>
+
+            {% endif %}
+
+        </div>
+
+        <!-- ACTION BUTTONS -->
+
+        <div class="btn-box">
+
+            <a href="#" class="btn track-btn">
+
+                📦 Track Order
+
+            </a>
+
+            <a href="#" class="btn support-btn">
+
+                ☎ Contact Support
+
+            </a>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+{% else %}
+
+    <div class="empty">
+
+        No Orders Available 🚚
+
+    </div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>

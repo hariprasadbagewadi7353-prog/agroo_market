@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Manage Orders</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#eef2ea;
+}
+
+/* NAVBAR */
+
+.navbar{
+    background:#2e7d32;
+    padding:18px 60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:white;
+    font-size:30px;
+    font-weight:bold;
+}
+
+.menu a{
+    color:white;
+    text-decoration:none;
+    margin-left:30px;
+    font-size:18px;
+    transition:0.3s;
+}
+
+.menu a:hover{
+    color:#dcedc8;
+}
+
+/* HERO */
+
+.hero{
+    height:260px;
+
+    background:
+    linear-gradient(
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.55)
+    ),
+
+    url("https://images.unsplash.com/photo-1578574577315-3fbeb0cecdc2?q=80&w=1400&auto=format&fit=crop");
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+
+    color:white;
+}
+
+.hero h1{
+    font-size:65px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:24px;
+}
+
+/* CONTAINER */
+
+.container{
+    width:95%;
+    margin:50px auto;
+}
+
+/* TABLE */
+
+.table-box{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 5px 18px rgba(0,0,0,0.1);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#2e7d32;
+    color:white;
+    padding:18px;
+    font-size:18px;
+}
+
+td{
+    padding:18px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+    font-size:16px;
+}
+
+tr:hover{
+    background:#f9f9f9;
+}
+
+/* STATUS */
+
+.status{
+    padding:8px 16px;
+    border-radius:30px;
+    color:white;
+    font-size:14px;
+    display:inline-block;
+}
+
+.placed{
+    background:#ff9800;
+}
+
+.packed{
+    background:#2196f3;
+}
+
+.delivery{
+    background:#9c27b0;
+}
+
+.delivered{
+    background:#2e7d32;
+}
+
+/* BUTTONS */
+
+.btn{
+    padding:10px 15px;
+    border-radius:8px;
+    text-decoration:none;
+    color:white;
+    font-size:14px;
+    margin:3px;
+    display:inline-block;
+    transition:0.3s;
+}
+
+.pack-btn{
+    background:#2196f3;
+}
+
+.ship-btn{
+    background:#ff9800;
+}
+
+.deliver-btn{
+    background:#2e7d32;
+}
+
+.btn:hover{
+    transform:scale(1.05);
+}
+
+/* EMPTY */
+
+.empty{
+    text-align:center;
+    font-size:35px;
+    color:#666;
+    margin-top:80px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+        🌾 Agro Marketplace
+    </div>
+
+    <div class="menu">
+
+        <a href="/">Home</a>
+        <a href="/show_products">Products</a>
+        <a href="/show_schemes">Schemes</a>
+        <a href="/admin_dashboard">Dashboard</a>
+        <a href="/logout">Logout</a>
+
+    </div>
+
+</div>
+
+<!-- HERO -->
+
+<div class="hero">
+
+    <div>
+
+        <h1>📦 Manage Orders</h1>
+
+        <p>
+            Track and update customer deliveries
+        </p>
+
+    </div>
+
+</div>
+
+<!-- TABLE SECTION -->
+
+<div class="container">
+
+{% if orders %}
+
+<div class="table-box">
+
+<table>
+
+<tr>
+
+    <th>Order ID</th>
+    <th>Customer</th>
+    <th>Product</th>
+    <th>Status</th>
+    <th>Actions</th>
+
+</tr>
+
+{% for o in orders %}
+
+<tr>
+
+    <td>
+        #{{ o.id }}
+    </td>
+
+    <td>
+        {{ o.customer_name }}
+    </td>
+
+    <td>
+        {{ o.product_name }}
+    </td>
+
+    <td>
+
+        {% if o.status == 'Order Placed' %}
+
+        <span class="status placed">
+            {{ o.status }}
+        </span>
+
+        {% elif o.status == 'Packed' %}
+
+        <span class="status packed">
+            {{ o.status }}
+        </span>
+
+        {% elif o.status == 'Out For Delivery' %}
+
+        <span class="status delivery">
+            {{ o.status }}
+        </span>
+
+        {% elif o.status == 'Delivered' %}
+
+        <span class="status delivered">
+            {{ o.status }}
+        </span>
+
+        {% endif %}
+
+    </td>
+
+    <td>
+
+        <a href="/update_status/{{ o.id }}/Packed"
+           class="btn pack-btn">
+
+           📦 Packed
+
+        </a>
+
+        <a href="/update_status/{{ o.id }}/Out For Delivery"
+           class="btn ship-btn">
+
+           🚚 Ship
+
+        </a>
+
+        <a href="/update_status/{{ o.id }}/Delivered"
+           class="btn deliver-btn">
+
+           ✅ Deliver
+
+        </a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% else %}
+
+<div class="empty">
+
+    No Orders Available 📦
+
+</div>
+
+{% endif %}
+
+</div>
+
+<!-- FLASH MESSAGE -->
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{ messages[0] }}");
+        </script>
+    {% endif %}
+{% endwith %}
+
+</body>
+</html>

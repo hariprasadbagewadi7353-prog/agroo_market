@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Government Schemes</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#eef2ea;
+        }
+
+        /* NAVBAR */
+
+        .navbar{
+            background:#2e7d32;
+            padding:18px 60px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .logo{
+            color:white;
+            font-size:24px;
+            font-weight:bold;
+        }
+
+        .menu a{
+            color:white;
+            text-decoration:none;
+            margin-left:30px;
+            font-size:18px;
+            transition:0.3s;
+        }
+
+        .menu a:hover{
+            color:#dcedc8;
+        }
+
+        /* HERO */
+
+        .hero{
+
+            height:520px;
+
+            background:
+            linear-gradient(
+            rgba(0,0,0,0.55),
+            rgba(0,0,0,0.55)
+            ),
+
+            url("{{ url_for('static', filename='image/gov_scheme.png') }}");
+
+            background-size:cover;
+            background-position:center;
+            background-repeat:no-repeat;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+
+            color:white;
+        }
+
+        .hero-content h1{
+            font-size:75px;
+            margin-bottom:20px;
+        }
+
+        .hero-content p{
+            font-size:30px;
+            margin-bottom:35px;
+        }
+
+        .hero-btn{
+            display:inline-block;
+            padding:16px 45px;
+            background:#2e7d32;
+            color:white;
+            text-decoration:none;
+            border-radius:40px;
+            font-size:22px;
+            transition:0.3s;
+        }
+
+        .hero-btn:hover{
+            background:#1b5e20;
+            transform:scale(1.05);
+        }
+
+        /* SECTION TITLE */
+
+        .section-title{
+            text-align:center;
+            margin:70px 0 40px;
+        }
+
+        .section-title h2{
+            color:#2e7d32;
+            font-size:58px;
+        }
+
+        /* CONTAINER */
+
+        .container{
+            width:90%;
+            margin:auto;
+            padding-bottom:70px;
+        }
+
+        /* GRID */
+
+        .grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:30px;
+        }
+
+        /* CARD */
+
+        .card{
+            background:white;
+            border-radius:22px;
+            overflow:hidden;
+            box-shadow:0 6px 18px rgba(0,0,0,0.12);
+            transition:0.3s;
+        }
+
+        .card:hover{
+            transform:translateY(-8px);
+            box-shadow:0 12px 28px rgba(0,0,0,0.2);
+        }
+
+        .card img{
+            width:100%;
+            height:240px;
+            object-fit:cover;
+        }
+
+        .content{
+            padding:22px;
+        }
+
+        .scheme-title{
+            color:#2e7d32;
+            font-size:28px;
+            font-weight:bold;
+            margin-bottom:14px;
+        }
+
+        .desc{
+            color:#555;
+            line-height:28px;
+            font-size:16px;
+            margin-bottom:20px;
+        }
+
+        video{
+            width:100%;
+            border-radius:12px;
+        }
+
+        .empty{
+            text-align:center;
+            color:#666;
+            font-size:28px;
+            margin-top:60px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+        🌾 Agro Marketplace
+    </div>
+
+    <div class="menu">
+
+        <a href="/">Home</a>
+        <a href="/show_products">Products</a>
+        <a href="/logout">Logout</a>
+
+    </div>
+
+</div>
+
+<!-- HERO SECTION -->
+
+<div class="hero">
+
+    <div class="hero-content">
+
+        <h1>Government Schemes</h1>
+
+        <p>
+            Agriculture support programs and farmer benefits
+        </p>
+
+        <a href="#schemes" class="hero-btn">
+            Explore Schemes
+        </a>
+
+    </div>
+
+</div>
+
+<!-- SECTION TITLE -->
+
+<div class="section-title" id="schemes">
+
+    <h2>🌱 Government Support Schemes</h2>
+
+</div>
+
+<!-- SCHEMES -->
+
+<div class="container">
+
+    {% if schemes %}
+
+    <div class="grid">
+
+        {% for s in schemes %}
+
+        <div class="card">
+
+            <!-- IMAGE -->
+
+            {% if s.image %}
+
+            <img src="{{ url_for('static', filename='uploads/' + s.image) }}">
+
+            {% else %}
+
+            <img src="{{ url_for('static', filename='images/gov_scheme.png') }}">
+
+            {% endif %}
+
+            <div class="content">
+
+                <div class="scheme-title">
+                    {{ s.title }}
+                </div>
+
+                <div class="desc">
+                    {{ s.description }}
+                </div>
+
+                <!-- VIDEO -->
+
+                {% if s.video %}
+
+                <video controls>
+
+                    <source src="{{ url_for('static', filename='uploads/' + s.video) }}">
+
+                </video>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="empty">
+
+        No Government Schemes Available
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+<!-- FLASH MESSAGE -->
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{ messages[0] }}");
+        </script>
+    {% endif %}
+{% endwith %}
+
+</body>
+</html>

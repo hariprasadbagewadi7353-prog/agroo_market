@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Farm Products</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+            background:#f6fbf4;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar{
+            width:100%;
+             background:rgba(46,125,50,0.95);
+            padding:18px 8%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            box-shadow:0 2px 10px rgba(245, 235, 235, 0.15);
+            position:sticky;
+            top:0;
+            z-index:1000;
+        }
+
+        .logo{
+            font-size:28px;
+            font-weight:bold;
+            color:#fff;
+        }
+
+        .menu a{
+            text-decoration:none;
+            color:#fff;
+            margin-left:20px;
+            font-size:15px;
+            transition:0.3s;
+        }
+
+        .menu a:hover{
+             color:#fff;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero{
+            width:100%;
+            height:420px;
+            background:
+            linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+            url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1600');
+
+            background-size:cover;
+            background-position:center;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+            text-align:center;
+            color:white;
+        }
+
+        .hero h1{
+            font-size:55px;
+            margin-bottom:15px;
+        }
+
+        .hero p{
+            font-size:20px;
+            margin-bottom:25px;
+        }
+
+        .hero button{
+            padding:14px 28px;
+            border:none;
+            background:#2e7d32;
+            color:white;
+            border-radius:30px;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .hero button:hover{
+            background:#1b5e20;
+            transform:scale(1.05);
+        }
+
+        /* ================= SECTION TITLE ================= */
+
+        .section-title{
+            text-align:center;
+            margin:60px 0 30px;
+            color:#2e7d32;
+            font-size:36px;
+        }
+
+        /* ================= PRODUCTS ================= */
+
+        .container{
+            width:90%;
+            margin:auto;
+            padding-bottom:50px;
+        }
+
+        .grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+            gap:30px;
+        }
+
+        .card{
+            background:white;
+            border-radius:20px;
+            overflow:hidden;
+            box-shadow:0 5px 20px rgba(0,0,0,0.08);
+            transition:0.4s;
+            position:relative;
+        }
+
+        .card:hover{
+            transform:translateY(-10px);
+            box-shadow:0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        .badge{
+            position:absolute;
+            top:15px;
+            left:15px;
+            background:#ff9800;
+            color:white;
+            padding:5px 12px;
+            border-radius:20px;
+            font-size:12px;
+        }
+
+        .card img{
+            width:100%;
+            height:240px;
+            object-fit:contain;
+            background:#f8f8f8;
+            padding:15px;
+        }
+
+        .content{
+            padding:18px;
+        }
+
+        .name{
+            font-size:22px;
+            font-weight:600;
+            margin-bottom:10px;
+            color:#222;
+        }
+
+        .price{
+            color:#2e7d32;
+            font-size:20px;
+            font-weight:bold;
+            margin-bottom:8px;
+        }
+
+        .info{
+            color:#666;
+            margin:6px 0;
+            font-size:15px;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .actions{
+            margin-top:18px;
+            display:flex;
+            gap:10px;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            flex:1;
+            text-align:center;
+            padding:11px;
+            text-decoration:none;
+            color:white;
+            border-radius:10px;
+            transition:0.3s;
+            font-size:14px;
+            font-weight:500;
+        }
+
+        .cart{
+            background:#2e7d32;
+        }
+
+        .cart:hover{
+            background:#1b5e20;
+        }
+
+        .buy{
+            background:#ff9800;
+        }
+
+        .buy:hover{
+            background:#e68900;
+        }
+
+        .delete{
+            background:#e53935;
+        }
+
+        .delete:hover{
+            background:#b71c1c;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer{
+            background:#1b5e20;
+            color:white;
+            text-align:center;
+            padding:20px;
+            margin-top:50px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width:768px){
+
+            .hero h1{
+                font-size:38px;
+            }
+
+            .hero p{
+                font-size:16px;
+            }
+
+            .navbar{
+                flex-direction:column;
+            }
+
+            .menu{
+                margin-top:10px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+        🌾 Agro Marketplce
+    </div>
+
+    <div class="menu">
+        <a href="/">Home</a>
+        <a href="/cart">Cart</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</div>
+
+<!-- HERO -->
+
+<div class="hero">
+
+    <h1>Fresh From Farmers</h1>
+
+    <p>
+        Buy natural and healthy products directly from farmers
+    </p>
+
+    <button onclick="window.location.href='#products'">
+        Explore Products
+    </button>
+
+</div>
+
+<!-- PRODUCTS -->
+
+<h2 class="section-title" id="products">
+    🌱 Our Products
+</h2>
+
+<div class="container">
+
+    <div class="grid">
+
+        {% for p in products %}
+
+        <div class="card">
+
+            <div class="badge">
+                Fresh
+            </div>
+
+            {% if p.image %}
+                <img src="{{ url_for('static', filename='uploads/' + p.image) }}">
+            {% else %}
+                <img src="https://via.placeholder.com/300x200?text=No+Image">
+            {% endif %}
+
+            <div class="content">
+
+                <div class="name">
+                    {{ p.name }}
+                </div>
+
+                <div class="price">
+                    ₹ {{ p.price }}
+                </div>
+
+                <div class="info">
+                    📍 {{ p.location }}
+                </div>
+
+                <div class="info">
+                    📦 {{ p.quantity }}
+                </div>
+
+                <div class="actions">
+
+                    <a href="/add_to_cart/{{ p.id }}" class="btn cart">
+                        🛒 Add Cart
+                    </a>
+
+                    <a href="/buy/{{ p.id }}" class="btn buy">
+                        ⚡ Buy Now
+                    </a>
+
+                    {% if 'farmer' in session and p.farmer_id == session.get('farmer_id') %}
+                    <a href="/delete_product/{{ p.id }}" class="btn delete">
+                        🗑 Delete
+                    </a>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+    © 2026 Agro Marketplace | Fresh Food Directly From Farmers 🌿
+</div>
+
+<!-- FLASH MESSAGE -->
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{ messages[0] }}");
+        </script>
+    {% endif %}
+{% endwith %}
+
+</body>
+</html>ss

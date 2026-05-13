@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Agro Marketplace</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f5f5f5;
+}
+
+/* Navbar */
+.navbar{
+    background:#2e7d32;
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.menu a{
+    color:white;
+    text-decoration:none;
+    margin:0 15px;
+    font-size:16px;
+}
+
+/* Form Container */
+.container{
+    width:400px;
+    margin:60px auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+h1{
+    color:#2e7d32;
+}
+
+input{
+    width:90%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+/* Button */
+button{
+    background:#ff9800;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#e68900;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+<div class="logo">🌾 Agro Marketplace</div>
+
+<div class="menu">
+<a href="/">Home</a>
+<a href="/login_farmer">Farmer Login</a>
+<a href="/login_customer">Customer Login</a>
+<a href="/register_farmer">Farmer Register</a>
+<a href="/register_customer">Customer Register</a>
+</div>
+</div>
+
+<!-- Form -->
+<div class="container">
+
+<h1>Add Product</h1>
+
+<form action="/add_product" method="post" enctype="multipart/form-data">
+
+<input type="text" name="name" placeholder="Product Name" required>
+
+<input type="text" name="price" placeholder="Price" required>
+
+<input type="text" name="location" placeholder="Location" required>
+
+<input type="text" name="quantity" placeholder="Quantity" required>
+
+<!-- ✅ IMAGE UPLOAD -->
+<input type="file" name="image" accept="image/*" required>
+
+<button type="submit">Add Product</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

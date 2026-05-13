@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Farmer Login</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f4f4f4;
+        }
+
+        /* NAVBAR */
+
+        .navbar{
+            background:#2e7d32;
+            padding:18px 50px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .logo{
+            color:white;
+            font-size:28px;
+            font-weight:bold;
+        }
+
+        .menu a{
+            color:white;
+            text-decoration:none;
+            margin-left:25px;
+            font-size:16px;
+            transition:0.3s;
+        }
+
+        .menu a:hover{
+            color:#dcedc8;
+        }
+
+        /* CONTAINER */
+
+        .container{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:85vh;
+        }
+
+        /* LOGIN BOX */
+
+        .login-box{
+            width:380px;
+            background:white;
+            padding:40px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+            text-align:center;
+        }
+
+        .icon{
+            font-size:60px;
+            margin-bottom:10px;
+        }
+
+        h2{
+            margin-bottom:30px;
+            color:#2e7d32;
+        }
+
+        .input-box{
+            margin-bottom:20px;
+        }
+
+        .input-box input{
+            width:100%;
+            padding:14px;
+            border:1px solid #ccc;
+            border-radius:8px;
+            outline:none;
+            font-size:15px;
+        }
+
+        .input-box input:focus{
+            border-color:#2e7d32;
+        }
+
+        .btn{
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:8px;
+            background:#2e7d32;
+            color:white;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:#1b5e20;
+        }
+
+        .bottom-text{
+            margin-top:18px;
+            font-size:14px;
+            color:#555;
+        }
+
+        .bottom-text a{
+            color:#2e7d32;
+            text-decoration:none;
+            font-weight:bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+        🌾 Agro Marketplace
+    </div>
+
+    <div class="menu">
+
+        <a href="/">Home</a>
+        <a href="/show_products">Products</a>
+        <a href="/show_schemes">Schemes</a>
+        <a href="/register_farmer">Register</a>
+
+    </div>
+
+</div>
+
+<!-- LOGIN FORM -->
+
+<div class="container">
+
+    <div class="login-box">
+
+        <div class="icon">
+            👨‍🌾
+        </div>
+
+        <h2>Farmer Login</h2>
+
+        <form action="/login_farmer" method="POST">
+
+            <div class="input-box">
+
+                <input type="text"
+                       name="username"
+                       placeholder="Enter Username"
+                       required>
+
+            </div>
+
+            <div class="input-box">
+
+                <input type="password"
+                       name="password"
+                       placeholder="Enter Password"
+                       required>
+
+            </div>
+
+            <button type="submit" class="btn">
+                Login
+            </button>
+
+        </form>
+
+        <div class="bottom-text">
+
+            New Farmer?
+            <a href="/register_farmer">
+                Register Here
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FLASH MESSAGE -->
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{ messages[0] }}");
+        </script>
+    {% endif %}
+{% endwith %}
+
+</body>
+</html>

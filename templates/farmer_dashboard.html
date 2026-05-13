@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+            background:#f4faf3;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar{
+            width:100%;
+            background:#2e7d32;
+            padding:18px 8%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            color:white;
+            box-shadow:0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo{
+            font-size:28px;
+            font-weight:bold;
+        }
+
+        .menu a{
+            color:white;
+            text-decoration:none;
+            margin-left:20px;
+            transition:0.3s;
+        }
+
+        .menu a:hover{
+            color:#c8facc;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero{
+            text-align:center;
+            padding:60px 20px 40px;
+        }
+
+        .hero h1{
+            font-size:42px;
+            color:#2e7d32;
+            margin-bottom:10px;
+        }
+
+        .hero p{
+            color:#666;
+            font-size:18px;
+        }
+
+        /* ================= CARDS ================= */
+
+        .container{
+            width:90%;
+            margin:auto;
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:30px;
+            margin-top:40px;
+            padding-bottom:50px;
+        }
+
+        .card{
+            background:white;
+            border-radius:20px;
+            padding:30px;
+            text-align:center;
+            box-shadow:0 5px 20px rgba(0,0,0,0.08);
+            transition:0.3s;
+        }
+
+        .card:hover{
+            transform:translateY(-8px);
+            box-shadow:0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .icon{
+            font-size:55px;
+            margin-bottom:20px;
+        }
+
+        .card h2{
+            color:#2e7d32;
+            margin-bottom:15px;
+        }
+
+        .card p{
+            color:#666;
+            margin-bottom:20px;
+            font-size:15px;
+        }
+
+        .btn{
+            display:inline-block;
+            padding:12px 20px;
+            background:#2e7d32;
+            color:white;
+            text-decoration:none;
+            border-radius:10px;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:#1b5e20;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer{
+            background:#1b5e20;
+            color:white;
+            text-align:center;
+            padding:18px;
+            margin-top:30px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width:768px){
+
+            .hero h1{
+                font-size:32px;
+            }
+
+            .navbar{
+                flex-direction:column;
+                text-align:center;
+            }
+
+            .menu{
+                margin-top:10px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+        🌾 Farmer Dashboard
+    </div>
+
+    <div class="menu">
+        <a href="/show_products">Products</a>
+        <a href="/add_product">Add Product</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</div>
+
+<!-- HERO -->
+
+<div class="hero">
+
+    <h1>Welcome Farmer 👨‍🌾</h1>
+
+    <p>
+        Manage your products and grow your business online
+    </p>
+
+</div>
+
+<!-- DASHBOARD CARDS -->
+
+<div class="container">
+
+    <!-- VIEW PRODUCTS -->
+
+    <div class="card">
+
+        <div class="icon">
+            🌽
+        </div>
+
+        <h2>View Products</h2>
+
+        <p>
+            See all products available in marketplace
+        </p>
+
+        <a href="/show_products" class="btn">
+            Open
+        </a>
+
+    </div>
+
+    <!-- ADD PRODUCT -->
+
+    <div class="card">
+
+        <div class="icon">
+            ➕
+        </div>
+
+        <h2>Add Product</h2>
+
+        <p>
+            Add fresh vegetables, fruits and crops
+        </p>
+
+        <a href="/add_product" class="btn">
+            Add Now
+        </a>
+
+    </div>
+
+    <!-- GOVT SCHEMES -->
+
+    <div class="card">
+
+        <div class="icon">
+            📜
+        </div>
+
+        <h2>Govt Schemes</h2>
+
+        <p>
+            Explore latest government farmer schemes
+        </p>
+
+        <a href="/show_schemes" class="btn">
+            View Schemes
+        </a>
+
+    </div>
+
+    <!-- LOGOUT -->
+
+    <div class="card">
+
+        <div class="icon">
+            🚪
+        </div>
+
+        <h2>Logout</h2>
+
+        <p>
+            Securely logout from your account
+        </p>
+
+        <a href="/logout" class="btn">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+    © 2026 Agro Marketplace | Farmer Panel 🌱
+</div>
+
+</body>
+</html>
