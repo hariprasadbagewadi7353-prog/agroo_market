@@ -6,8 +6,14 @@
 
     <style>
 
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
+
         body{
-            font-family:Arial;
             background:#f4f4f4;
             padding:30px;
         }
@@ -16,12 +22,14 @@
             text-align:center;
             color:#2e7d32;
             margin-bottom:40px;
+            font-size:40px;
         }
 
         h2{
             color:#2e7d32;
-            margin-top:40px;
+            margin-top:50px;
             margin-bottom:15px;
+            font-size:30px;
         }
 
         table{
@@ -29,29 +37,40 @@
             border-collapse:collapse;
             background:white;
             margin-bottom:30px;
-            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+            border-radius:12px;
+            overflow:hidden;
+            box-shadow:0 4px 12px rgba(0,0,0,0.1);
         }
 
         th{
             background:#2e7d32;
             color:white;
+            padding:16px;
+            font-size:18px;
         }
 
-        th, td{
-            padding:14px;
+        td{
+            padding:15px;
             border:1px solid #ddd;
             text-align:center;
+            font-size:16px;
         }
 
         tr:hover{
-            background:#f1f1f1;
+            background:#f9f9f9;
         }
 
         img{
-            width:80px;
-            height:80px;
+            width:90px;
+            height:90px;
             object-fit:cover;
             border-radius:10px;
+            border:2px solid #eee;
+        }
+
+        .no-image{
+            color:#888;
+            font-size:14px;
         }
 
     </style>
@@ -76,8 +95,11 @@
 {% for f in farmers %}
 
 <tr>
+
     <td>{{ f.id }}</td>
+
     <td>{{ f.username }}</td>
+
 </tr>
 
 {% endfor %}
@@ -99,8 +121,11 @@
 {% for c in customers %}
 
 <tr>
+
     <td>{{ c.id }}</td>
+
     <td>{{ c.username }}</td>
+
 </tr>
 
 {% endfor %}
@@ -134,6 +159,12 @@
         {% if p.image %}
 
         <img src="{{ url_for('static', filename='uploads/' + p.image) }}">
+
+        {% else %}
+
+        <div class="no-image">
+            No Image
+        </div>
 
         {% endif %}
 
@@ -213,6 +244,12 @@
         {% if s.image %}
 
         <img src="{{ url_for('static', filename='uploads/' + s.image) }}">
+
+        {% else %}
+
+        <div class="no-image">
+            No Image
+        </div>
 
         {% endif %}
 
