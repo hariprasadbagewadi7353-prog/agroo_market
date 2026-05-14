@@ -82,13 +82,15 @@
             border-radius:8px;
             transition:0.3s;
             font-size:16px;
+            margin:5px;
         }
 
         .btn:hover{
             background:#1b5e20;
         }
 
-        /* Logout Button */
+        /* Special Buttons */
+
         .logout{
             background:red;
         }
@@ -97,15 +99,27 @@
             background:darkred;
         }
 
+        .data-btn{
+            background:#1565c0;
+        }
+
+        .data-btn:hover{
+            background:#0d47a1;
+        }
+
     </style>
 
 </head>
 
 <body>
 
+<!-- NAVBAR -->
+
 <div class="navbar">
     🌾 Agro Marketplace Admin Dashboard
 </div>
+
+<!-- CONTAINER -->
 
 <div class="container">
 
@@ -114,6 +128,7 @@
     <div class="grid">
 
         <!-- Add Product -->
+
         <div class="card">
 
             <div class="icon">➕</div>
@@ -125,15 +140,11 @@
             <a href="/add_product" class="btn">
                 Open
             </a>
-            <div>
-            <a href="/manage_orders"  class="btn">
-    Manage Orders
-</a>
-</div>
 
         </div>
 
         <!-- View Products -->
+
         <div class="card">
 
             <div class="icon">🛒</div>
@@ -149,6 +160,7 @@
         </div>
 
         <!-- Register Farmer -->
+
         <div class="card">
 
             <div class="icon">👨‍🌾</div>
@@ -164,6 +176,7 @@
         </div>
 
         <!-- Register Customer -->
+
         <div class="card">
 
             <div class="icon">🧑‍💼</div>
@@ -179,6 +192,7 @@
         </div>
 
         <!-- Add Scheme -->
+
         <div class="card">
 
             <div class="icon">📢</div>
@@ -193,7 +207,40 @@
 
         </div>
 
+        <!-- Manage Orders -->
+
+        <div class="card">
+
+            <div class="icon">📦</div>
+
+            <div class="title">
+                Manage Orders
+            </div>
+
+            <a href="/manage_orders" class="btn">
+                Open
+            </a>
+
+        </div>
+
+        <!-- All Data -->
+
+        <div class="card">
+
+            <div class="icon">📊</div>
+
+            <div class="title">
+                View All Data
+            </div>
+
+            <a href="/all_data" class="btn data-btn">
+                Open Database
+            </a>
+
+        </div>
+
         <!-- Logout -->
+
         <div class="card">
 
             <div class="icon">🚪</div>
@@ -204,24 +251,6 @@
 
             <a href="/logout" class="btn logout">
                 Logout
-            </a>
-
-        </div>
-        
-
-        </div>
-
-        <!-- View Products -->
-        <div class="card">
-
-            <div class="icon">data</div>
-
-            <div class="title">
-                View data
-            </div>
-
-            <a href="/all_data" class="btn">
-                Open
             </a>
 
         </div>
