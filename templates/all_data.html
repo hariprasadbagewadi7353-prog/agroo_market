@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>All Data</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#f4f4f4;
+            padding:30px;
+        }
+
+        h1{
+            text-align:center;
+            color:#2e7d32;
+            margin-bottom:40px;
+        }
+
+        h2{
+            color:#2e7d32;
+            margin-top:40px;
+            margin-bottom:15px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:white;
+            margin-bottom:30px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        th{
+            background:#2e7d32;
+            color:white;
+        }
+
+        th, td{
+            padding:14px;
+            border:1px solid #ddd;
+            text-align:center;
+        }
+
+        tr:hover{
+            background:#f1f1f1;
+        }
+
+        img{
+            width:80px;
+            height:80px;
+            object-fit:cover;
+            border-radius:10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>📊 Agro Marketplace Database</h1>
+
+<!-- FARMERS -->
+
+<h2>👨‍🌾 Farmers</h2>
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>Username</th>
+</tr>
+
+{% for f in farmers %}
+
+<tr>
+    <td>{{ f.id }}</td>
+    <td>{{ f.username }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+<!-- CUSTOMERS -->
+
+<h2>🧑 Customers</h2>
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>Username</th>
+</tr>
+
+{% for c in customers %}
+
+<tr>
+    <td>{{ c.id }}</td>
+    <td>{{ c.username }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+<!-- PRODUCTS -->
+
+<h2>🥦 Products</h2>
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>Image</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Location</th>
+    <th>Quantity</th>
+</tr>
+
+{% for p in products %}
+
+<tr>
+
+    <td>{{ p.id }}</td>
+
+    <td>
+
+        {% if p.image %}
+
+        <img src="{{ url_for('static', filename='uploads/' + p.image) }}">
+
+        {% endif %}
+
+    </td>
+
+    <td>{{ p.name }}</td>
+
+    <td>₹ {{ p.price }}</td>
+
+    <td>{{ p.location }}</td>
+
+    <td>{{ p.quantity }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+<!-- ORDERS -->
+
+<h2>📦 Orders</h2>
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>Customer</th>
+    <th>Product</th>
+    <th>Address</th>
+    <th>Status</th>
+</tr>
+
+{% for o in orders %}
+
+<tr>
+
+    <td>{{ o.id }}</td>
+
+    <td>{{ o.customer_name }}</td>
+
+    <td>{{ o.product_name }}</td>
+
+    <td>{{ o.address }}</td>
+
+    <td>{{ o.status }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+<!-- SCHEMES -->
+
+<h2>🏛️ Government Schemes</h2>
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>Image</th>
+    <th>Title</th>
+    <th>Description</th>
+</tr>
+
+{% for s in schemes %}
+
+<tr>
+
+    <td>{{ s.id }}</td>
+
+    <td>
+
+        {% if s.image %}
+
+        <img src="{{ url_for('static', filename='uploads/' + s.image) }}">
+
+        {% endif %}
+
+    </td>
+
+    <td>{{ s.title }}</td>
+
+    <td>{{ s.description }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>

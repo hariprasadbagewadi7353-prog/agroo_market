@@ -671,130 +671,36 @@ def logout():
 
 
 
+
+
+
 # ------------------------
-# VIEW ALL FARMERS
+# ALL DATA PAGE
 # ------------------------
 
-@app.route('/all_farmers')
-def all_farmers():
+@app.route('/all_data')
+def all_data():
 
     farmers = Farmer.query.all()
 
-    data = []
-
-    for f in farmers:
-
-        data.append({
-
-            "id": f.id,
-            "username": f.username
-
-        })
-
-    return {"farmers": data}
-
-
-# ------------------------
-# VIEW ALL CUSTOMERS
-# ------------------------
-
-@app.route('/all_customers')
-def all_customers():
-
     customers = Customer.query.all()
-
-    data = []
-
-    for c in customers:
-
-        data.append({
-
-            "id": c.id,
-            "username": c.username
-
-        })
-
-    return {"customers": data}
-
-
-# ------------------------
-# VIEW ALL PRODUCTS
-# ------------------------
-
-@app.route('/all_products')
-def all_products():
 
     products = Product.query.all()
 
-    data = []
-
-    for p in products:
-
-        data.append({
-
-            "id": p.id,
-            "name": p.name,
-            "price": p.price,
-            "location": p.location,
-            "quantity": p.quantity,
-            "image": p.image
-
-        })
-
-    return {"products": data}
-
-
-# ------------------------
-# VIEW ALL ORDERS
-# ------------------------
-
-@app.route('/all_orders')
-def all_orders():
-
     orders = Order.query.all()
-
-    data = []
-
-    for o in orders:
-
-        data.append({
-
-            "id": o.id,
-            "customer_name": o.customer_name,
-            "product_name": o.product_name,
-            "address": o.address,
-            "status": o.status
-
-        })
-
-    return {"orders": data}
-
-
-# ------------------------
-# VIEW ALL SCHEMES
-# ------------------------
-
-@app.route('/all_schemes')
-def all_schemes():
 
     schemes = Scheme.query.all()
 
-    data = []
+    return render_template(
 
-    for s in schemes:
+        "all_data.html",
 
-        data.append({
-
-            "id": s.id,
-            "title": s.title,
-            "description": s.description,
-            "image": s.image,
-            "video": s.video
-
-        })
-
-    return {"schemes": data}
-
+        farmers=farmers,
+        customers=customers,
+        products=products,
+        orders=orders,
+        schemes=schemes
+    )
 # ------------------------
 # RUN
 # ------------------------
